@@ -13,7 +13,7 @@ function Balance(){
 
 function Header() {
   return (
-    <div className='bg-white h-27 border border-b-gray-100 shadow-sm'>
+    <div className='bg-white h-27 border border-b-gray-100 shadow-sm fixed w-full top-0 z-50'>
         <Balance/>
         <div className="flex justify-between items-center px-4">
           <div className='flex flex-row gap-2 items-center p-2'>
