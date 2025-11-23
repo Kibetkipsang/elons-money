@@ -35,9 +35,9 @@ function Header() {
             <h2 className='font-bold text-black text-2xl'>SPEND ELON'S MONEY</h2>
         </div>
         <div className='flex flex-row gap-6 items-center'>
-          <nav className='flex gap-4 font-bold'>
-            <Link to="/">Spend</Link>
-            <Link to="/receipt">Receipt</Link>
+          <nav className='flex gap-4 font-bold '>
+            <Link to="/" className='hover:underline'>Spend</Link>
+            <Link to="/receipt" className='hover:underline'>Receipt</Link>
           </nav>
           <Button onClick={() => setShowModal(true)}>AC</Button>
           <div className='h-15 w-15 rounded-full bg-gray-200 flex justify-center items-center font-bold text-2xl'>
