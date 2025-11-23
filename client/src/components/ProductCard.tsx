@@ -1,28 +1,48 @@
+import { useProductStore } from "@/stores/ProductStore";
+import { MdError } from "react-icons/md";
+import {toast} from 'sonner'
 import { Button } from "./ui/button"
-import rolex from '../assets/rolex.jpg'
-import ford from '../assets/ford.jpg'
-import tesla from '../assets/tesla.jpg'
-import monster from '../assets/monster.jpg'
-import ferrari from '../assets/ferrari.jpg'
-import jet from '../assets/jet.jpg'
+
+
 
 function ProductCard() {
+    const products = useProductStore(state => state.products);
+    const netWorth = useProductStore(state => state.netWorth);
+    const buy = useProductStore(state => state.buy);
+    const sell = useProductStore(state=> state.sell);
 
-const products = [
-    
-{name: 'Rolex', price: 15000, img: rolex },
-{name: 'Ford F 150', price: 30000, img: ford },
-{name: 'Tesla', price: 75000, img: tesla },
-{name: 'Monster Truck', price: 150000, img: monster},
-{name: 'Ferarri', price: 250000, img: ferrari },
-{name: 'Private Jet', price: 20000000, img: jet },
-{name: 'Hellicopter', price: 31000000 },
-{name: 'Yachts', price: 7500000 },
-{name: 'Mansion', price: 45000000 },
-{name: 'Acre Of Land', price: 10000 },
-{name: 'Apartment', price: 200000 },
-{name: 'Cruise Ship', price: 930000000 },
-];
+    const handleBuy = (productName: string) => {
+    const product = products.find(p => p.name === productName);
+    if (!product) return;
+
+    if (netWorth >= product.price) {
+      buy(productName);
+      toast.success(`Bought ${product.name}!`);
+    } else {
+      toast(
+        <div className="flex items-center gap-2 text-red-600">
+          <MdError /> 
+          <span>Insufficient funds!</span>
+        </div>
+      );
+    }
+  };
+
+    const handleSell = (productName: string) => {
+    const product = products.find(p => p.name === productName);
+    if (!product || product.quantity <= 0) {
+      toast(
+        <div className="flex items-center gap-2 text-red-600">
+          <MdError />
+          <span>No items to sell!</span>
+        </div>
+      );
+      return;
+    }
+    sell(productName);
+    toast.success(`Sold ${product.name}!`);
+  };
+  
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-2 ">
@@ -36,8 +56,9 @@ const products = [
                     </div>
                 </div>
                 <div className="flex justify-between">
-                    <Button className="w-[6rem]">Sell</Button>
-                    <Button className="w-[6rem]">Buy</Button>
+                    <Button className={product.quantity <= 0 ? 'w-[6rem] bg-gray-400 cursor-not-allowed' : 'w-[6rem] bg-red-600 hover:bg-red-700'} onClick={() => handleSell(product.name)}>Sell</Button>
+                    <span className="font-bold text-md">{product.quantity}</span>
+                    <Button className={netWorth < product.price ? 'w-[6rem] bg-gray-400 cursor-not-allowed' : 'w-[6rem] bg-green-600 hover:bg-green-700'} onClick={() => handleBuy(product.name)}>Buy</Button>
                 </div>
             </div>
             
