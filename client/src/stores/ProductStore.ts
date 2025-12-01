@@ -12,6 +12,7 @@ import apartment from '../assets/apartment.jpg'
 import cruise from '../assets/cruise.jpg'
 import land from '../assets/land.jpg'
 import iphone from '../assets/iphone.jpg'
+import laptop from '../assets/laptops.jpg'
 
 
 
@@ -44,7 +45,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     { name: 'Acre Of Land', price: 10000, img: land, quantity: 0 },
     { name: 'Apartment', price: 200000, img: apartment, quantity: 0 },
     { name: 'Donation To Charity', price: 1000000, img: apartment, quantity: 0 },
-    { name: 'Mac book Laptops', price: 2000, img: cruise, quantity: 0 },
+    { name: 'Mac book Laptops', price: 2000, img: laptop, quantity: 0 },
     { name: 'Iphone 17', price: 3000, img: iphone, quantity: 0 },
   ],
     buy: (name) => {
