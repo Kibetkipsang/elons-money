@@ -47,6 +47,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     { name: 'Donation To Charity', price: 1000000, img: apartment, quantity: 0 },
     { name: 'Mac book Laptops', price: 2000, img: laptop, quantity: 0 },
     { name: 'Iphone 17', price: 3000, img: iphone, quantity: 0 },
+    { name: 'Cruise Ship', price: 999000000, img: cruise, quantity: 0 },
   ],
     buy: (name) => {
     const { products, netWorth } = get();
